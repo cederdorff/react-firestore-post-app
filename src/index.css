@@ -199,6 +199,11 @@ button.btn-outline {
     border: solid 2px var(--green);
 }
 
+button.light {
+    background-color: var(--light-green);
+    color: var(--green);
+}
+
 .btn-sign-out {
     position: absolute;
     right: 0;

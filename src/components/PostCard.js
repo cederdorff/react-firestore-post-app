@@ -1,12 +1,21 @@
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import UserAvatar from "./UserAvatar";
-import { postsRef, usersRef } from "../firebase-config";
-import { arrayUnion, doc, updateDoc } from "@firebase/firestore";
+import { usersRef } from "../firebase-config";
+import { arrayRemove, arrayUnion, doc, getDoc, onSnapshot, updateDoc } from "@firebase/firestore";
+import { useEffect, useState } from "react";
 
 export default function PostCard({ post }) {
     const navigate = useNavigate();
     const auth = getAuth();
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const unsubscribe = onSnapshot(doc(usersRef, auth.currentUser.uid), doc => {
+            setUser(doc.data());
+        });
+        return () => unsubscribe();
+    }, [auth.currentUser.uid]);
 
     /**
      * handleClick is called when user clicks on the Article (PostCard)
@@ -17,10 +26,16 @@ export default function PostCard({ post }) {
 
     async function handleAddToFav() {
         const currentUserDocRef = doc(usersRef, auth.currentUser.uid); // reference to current authenticated user doc
-        const postRef = doc(postsRef, post.id); // reference to the post you want to add to favorites
         await updateDoc(currentUserDocRef, {
-            favorites: arrayUnion(postRef) // updating current user's favorites field in firebase by adding a doc ref to the post
-        }); // docs about update elemennts in an array: https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
+            favorites: arrayUnion(post.id) // updating current user's favorites field in firebase by adding a doc ref to the post
+        }); // docs about update elements in an array: https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
+    }
+
+    async function handleRemoveFromFav() {
+        const currentUserDocRef = doc(usersRef, auth.currentUser.uid); // reference to current authenticated user doc
+        await updateDoc(currentUserDocRef, {
+            favorites: arrayRemove(post.id) // updating current user's favorites field in firebase by adding a doc ref to the post
+        }); // docs about update elements in an array: https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
     }
 
     return (
@@ -31,7 +46,13 @@ export default function PostCard({ post }) {
                 <h2>{post.title}</h2>
                 <p>{post.body}</p>
             </div>
-            <button onClick={handleAddToFav}>Add to favorites</button>
+            {user.favorites?.includes(post.id) ? (
+                <button className="light" onClick={handleRemoveFromFav}>
+                    Remove from favorites
+                </button>
+            ) : (
+                <button onClick={handleAddToFav}>Add to favorites</button>
+            )}
         </article>
     );
 }
