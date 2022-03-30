@@ -27,14 +27,14 @@ export default function PostCard({ post }) {
     async function handleAddToFav() {
         const currentUserDocRef = doc(usersRef, auth.currentUser.uid); // reference to current authenticated user doc
         await updateDoc(currentUserDocRef, {
-            favorites: arrayUnion(post.id) // updating current user's favorites field in firebase by adding a doc ref to the post
+            favorites: arrayUnion(post.id) // updating current user's favorites field in firebase by adding post id
         }); // docs about update elements in an array: https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
     }
 
     async function handleRemoveFromFav() {
         const currentUserDocRef = doc(usersRef, auth.currentUser.uid); // reference to current authenticated user doc
         await updateDoc(currentUserDocRef, {
-            favorites: arrayRemove(post.id) // updating current user's favorites field in firebase by adding a doc ref to the post
+            favorites: arrayRemove(post.id) // updating current user's favorites field in firebase by removing post id
         }); // docs about update elements in an array: https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
     }
 
