@@ -2,7 +2,7 @@ import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import UserAvatar from "./UserAvatar";
 import { usersRef } from "../firebase-config";
-import { arrayRemove, arrayUnion, doc, getDoc, onSnapshot, updateDoc } from "@firebase/firestore";
+import { arrayRemove, arrayUnion, doc, onSnapshot, updateDoc } from "@firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function PostCard({ post }) {
