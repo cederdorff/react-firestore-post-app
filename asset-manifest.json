@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-firestore-favorite-posts/static/css/main.7e5d0ebb.css",
+    "main.js": "/react-firestore-favorite-posts/static/js/main.e5d23dbb.js",
+    "static/js/787.9e77d474.chunk.js": "/react-firestore-favorite-posts/static/js/787.9e77d474.chunk.js",
+    "static/media/img-placeholder.jpg": "/react-firestore-favorite-posts/static/media/img-placeholder.963f1a6caa3d192cdee9.jpg",
+    "index.html": "/react-firestore-favorite-posts/index.html",
+    "main.7e5d0ebb.css.map": "/react-firestore-favorite-posts/static/css/main.7e5d0ebb.css.map",
+    "main.e5d23dbb.js.map": "/react-firestore-favorite-posts/static/js/main.e5d23dbb.js.map",
+    "787.9e77d474.chunk.js.map": "/react-firestore-favorite-posts/static/js/787.9e77d474.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7e5d0ebb.css",
+    "static/js/main.e5d23dbb.js"
+  ]
+}
