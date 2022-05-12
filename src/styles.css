@@ -141,12 +141,15 @@ nav a.active {
 
 .grid-container > article {
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
-    text-align: center;
     padding: 1.5em;
     background-color: var(--white);
     transition: 0.5s;
     animation: fadeIn 0.5s;
     cursor: pointer;
+}
+
+.grid-container > article ::first-letter {
+    text-transform: uppercase;
 }
 
 .grid-container > article:hover {
